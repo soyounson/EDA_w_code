@@ -1,5 +1,6 @@
 # 🦈 Global Shark Attacks data
 
+<!--- 
 Before modeling, data understand is the key part. Thus, we are going to do Exploratory Data Analysis (EDA) and trying to understand data fully. 
 That is the main scope of the work. Let's follow the steps. 
 
@@ -150,5 +151,5 @@ score is `0.35460` on the leaderboard.
 
 -----------------------------------
 
-
+-->
 
