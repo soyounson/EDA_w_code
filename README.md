@@ -2,7 +2,7 @@
 Data mining with code. Data mining, Data analysis, Exploratory Data Analysis (EDA), Visualization etc
 
 
-### ☺︎ Table of Contents
+### ☾ Table of contents
 - [x] 01. [Global Shark Attacks](https://github.com/soyounson/DM_w_code/blob/main/01_Shark_attack/README.md)
 - [ ] 02. 
 - [ ] 03. 
