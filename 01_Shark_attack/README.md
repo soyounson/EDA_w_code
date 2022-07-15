@@ -18,6 +18,7 @@ For fun, the global shark attacks dataset has been considered in this work.
 - [ ] Dataset
 - [ ] visualization 
 - [ ] correaltion matrix 
+- [ ] features engineering? feature importance?
 - [ ] Insight
 
 -----------------------------------------------------------------------
@@ -48,17 +49,9 @@ Time
 Species
 Investigator or Source
 
-### ☺︎ 노트 정리
-most voted code를 분석하고 이해하는 작업을 수행함으로써, 문제/데이터/솔루션에 대한 이해를 한다. 
 
-### ☺︎ Contents
-- [ ] Dataset
-- [ ] Initial feature analysis 
-- [ ] Model : Xgboost
 
-### ☺︎ Dataset 
 
-preprocessing + feature engineering 
 
 #### ☻ Train dataset : train.csv 
 
