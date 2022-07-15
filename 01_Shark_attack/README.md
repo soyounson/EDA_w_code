@@ -1,23 +1,33 @@
 # 🦈 Global Shark Attacks data
 
 Before modeling, data understand is the key part. Thus, we are going to do Exploratory Data Analysis (EDA) and trying to understand data fully. 
-That is the main scope of the work. Let's follow the steps. It will be super fun. 
+That is the main scope of the work. Let's follow the steps. 
+
+For fun, the global shark attacks dataset has been considered in this work. 
 
 
-***working***
+<p align="center">
+<img src="/images/shark.gif" width="450">
+</p>
 
 
-### ☺︎ Contents
+
+-----------------------------------------------------------------------
+
+### ☾ Table of contents
 - [ ] Dataset
-- [ ] Initial feature analysis 
-- [ ] Model : Xgboost
+- [ ] visualization 
+- [ ] correaltion matrix 
+- [ ] Insight
 
-### ☺︎ Data
+-----------------------------------------------------------------------
+
+### ☺︎ Dataset
 
 🦆 [Kaggle data](https://www.kaggle.com/datasets/teajay/global-shark-attacks)
 
 https://www.sharkattackfile.net/index.htm
-About this file
+
 
 The full dataset downloaded 29-09-2016. Each row corresponds to a shark attack. Columns:
 
@@ -136,10 +146,16 @@ sub.to_csv('simple_xgb.csv', index=False)
 score is `0.35460` on the leaderboard. 
 
 
+-----------------------------------------------------------------------
 
-## ☻ Reference
-[1] https://www.kaggle.com/competitions/nlp-getting-started/data    
+### ☻ Reference
+1. [ ]( )
 
+
+### ☻ image sources
+1. [Giphy](https://giphy.com/search/sesame-street)
+
+-----------------------------------
 
 
 
