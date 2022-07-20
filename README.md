@@ -1,6 +1,6 @@
-# 📊 DM_w_code
+# 📊 EDA_w_code
 
-**Data mining with code**
+**Data mining/Data Analysis with code**
 
 The main purpose of this project performs data mining, including data analysis, Exploratory Data Analysis (EDA), and visualization, using as many data sets as possible. I absolutely and truly believe that this practice will help us to build more insights and experiences. 
 Because in reality, we have encountered diverse problems and data sets and sometimes, we might be in panic and practice helps us a lot. Also, data mining is basically important to move forward to modeling. Here, we are going to analyze datasets, find patterns, and describe results with various perspectives and domain knowledge, if possible. 
