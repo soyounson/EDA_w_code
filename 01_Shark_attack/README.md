@@ -1,8 +1,6 @@
 # 🦈 Global Shark Attacks data
 
-<!--- 
-Before modeling, data understand is the key part. Thus, we are going to do Exploratory Data Analysis (EDA) and trying to understand data fully. 
-That is the main scope of the work. Let's follow the steps. 
+Before modeling, data understand is the key part. Thus, we are going to do Exploratory Data Analysis (EDA) and trying to understand data fully. That is the main scope of the work. Let's follow the steps. 
 
 For fun, the global shark attacks dataset has been considered in this work. 
 
@@ -16,140 +14,107 @@ For fun, the global shark attacks dataset has been considered in this work.
 -----------------------------------------------------------------------
 
 ### ☾ Table of contents
-- [ ] Dataset
-- [ ] visualization 
-- [ ] correaltion matrix 
-- [ ] features engineering? feature importance?
-- [ ] Insight
-
+- [x] Data acquisition
+- [x] Dataset
+- [ ] Preprocessing
+- [ ] Data mining : EDA, correaltion matrix, visualization 
+- [ ] Features engineering
 -----------------------------------------------------------------------
+
+### ☺︎ Data acquisition 
+
+download data set from the kaggle link below 
+
+🦆 [Kaggle data](https://www.kaggle.com/datasets/teajay/global-shark-attacks)
+[Global shark attacks file](https://www.sharkattackfile.net/index.htm)
+
 
 ### ☺︎ Dataset
 
-🦆 [Kaggle data](https://www.kaggle.com/datasets/teajay/global-shark-attacks)
-
-https://www.sharkattackfile.net/index.htm
-
-
-The full dataset downloaded 29-09-2016. Each row corresponds to a shark attack. Columns:
-
-Case Number
-Date
-Year
-Type
-Country
-Area
-Location
-Activity
-Name
-Sex
-Age
-Injury
-Fatal (Y/N)
-Time
-Species
-Investigator or Source
-
-
-
-
-
-#### ☻ Train dataset : train.csv 
-
-+ id: Looks like a simple rowID
-+ qid{1, 2}: The unique ID of each question in the pair
-+ question{1, 2}: The actual textual contents of the questions.
-+ is_duplicate: The label that we are trying to predict - whether the two questions are duplicates of each other.
-
-train 데이터 분석 결과은 아래와 같다. 
+First, you read csv file and check all variables. 
 
 ```
-- Total number of question pairs for training: 404290
-- Duplicate pairs: 36.92%
-- Total number of questions in the training data: 537933
-- Number of questions that appear multiple times: 111780
+df0 = pd.read_csv("attacks.csv",encoding = "ISO-8859-1")
+
+#..... describe dataset 
+print('================================================')
+print(df0.describe)
+print('================================================')
+print('total size :',df0.shape)
 ```
 
-metrics : LogLoss looks at the actual predicts as opposed to the order of predictions, we should be able to get a decent score by creating a submission predicting the mean value of the label.
+#### ☻ Variables 
+
+Total size of data is **25723 rows** and **24 columns**.
 
 
-#### ☻ Test dataset : test.csv 
-
-+ test_id: L
-+ question{1, 2}: The actual textual contents of the questions.
-
-test 데이터에는 `is_duplicate`,  즉 label이 존재하지 않음 
-
-We see a similar distribution for word count, with most questions being about 10 words long. It looks to me like the distribution of the training set seems more "pointy", while on the test set it is wider. Nevertheless, they are quite similar.
 
 
-#### ☻ Semantic Analysis
-take a look at usage of different punctuation in questions - this may form a basis for some interesting features later on.
-
-```
-Questions with question marks: 99.87%
-Questions with [math] tags: 0.12%
-Questions with full stops: 6.31%
-Questions with capitalised first letters: 99.81%
-Questions with capital letters: 99.95%
-Questions with numbers: 11.83%
-```
-
-### ☺︎ Initial Feature Analysis
-Before we create a model, we should take a look at how powerful some features are. I will start off with the word share feature from the benchmark model.
-
-#### ☻ TF-IDF
-This means that we weigh the terms by how uncommon they are, meaning that we care more about rare words existing in both questions than common one. This makes sense, as for example we care more about whether the word "exercise" appears in both than the word "and" - as uncommon words will be more indicative of the content.
+| Case Number |    Date    | Year |    Type    | country |   Area  | Location | Activity | Name | Sex | Age |        Injury       | Fatal (Y/N) | 
+| ----------- | ---------- | ---- | ---------- | ------- | ------- | -------- | -------- | ---- | --- | --- | ------------------- | ----------- |
+| 2018.05.26.a| 26-May-2018| 2018 | Unproviked |   USA   | Florida | Daytona  | Standing | male |  M  |  12 | Minor injury to foot|      N      |
 
 
-#### ☻ Rebalancing the data 
-However, before I do this, I would like to rebalance the data that XGBoost receives, since we have 37% positive class in our training data, and only 17% in the test data. By re-balancing the data so our training set has 17% positives, we can ensure that XGBoost outputs probabilities that will better match the data on the leaderboard, and should get a better score (since LogLoss looks at the probabilities themselves and not just the order of the predictions like AUC)
+| Time | Species | Investigator or Source| pdf | href formula | href | Case Number.1 | Case Number.2 | original order | Unnamed: 22 | Unnamed: 23 |       
+| ---- | ------- | --------------------- | --- | ------------ | ---- | ------------- | ------------- | -------------- | ----------- | ----------- |
+| 14h00|   nan   | K. McMurray, Tracking Sharks.com |2018.05.26.a-DaytonaBeach.pdf | http://sharkattackfile.net/spreadsheets/pdf_directory/2018.05.26.a-DaytonaBeach.pdf | http://sharkattackfile.net/spreadsheets/pdf_directory/2018.05.26.a-DaytonaBeach.pdf | 2018.05.26.a  | 2018.05.26.a | 6294 | nan | nan |
 
 
-### ☺︎ Baseline Methodologies
-#### ☻ XGBoost
+In details, it is necessary to understand all columns, contents, and values whether numerical or categorical.
+       
+- `Case Number` :  Date 
+- `Date` : LITR, date when incident happended. 
+- `Year` : LITR, year 
+- `Type` : provoke, unprovoked, ... 
+- `Country` 
+- `Area` : area, espeically states in the USA 
+- `Location` : exact location
+- `Activity` : what kinda activities when they were attacked by sharks
+- [delete] `Name` : name of victims 
+- `Sex` : LITR, sex. Male or Female 
+- `Age` : LITR, age 
+- `Injury` : wounded parts in the attack
+- `Fatal (Y/N)` : seriousness
+- `Time` : Exact time or a time slot 
+- `Species` : what kinda sharks 
+- [delete] `Investigator or Source` : name who invested the incident 
+- [delete] `pdf` : title of the investing file 
+- [delete] `href formula` : directory of file 
+- [delete, duplicate] `href` : same w/ href formula
+- `Case Number.1` : Casenumber, same w/ date 
+- [delete, duplicate] `Case Number.2` : same w/ Case Number.1
+- [delete, duplicate]`original order` : order of incidents
+- [delete] `Unnamed: 22` : all nan
+- [delete] `Unnamed: 23`  : all nan
 
-```
-import xgboost as xgb
 
-# Set our parameters for xgboost
-params = {}
-params['objective'] = 'binary:logistic'
-params['eval_metric'] = 'logloss'
-params['eta'] = 0.02
-params['max_depth'] = 4
+-------------------------------------------------
+### ☺︎ Preprocessing 
 
-d_train = xgb.DMatrix(x_train, label=y_train)
-d_valid = xgb.DMatrix(x_valid, label=y_valid)
+Before moving to EDA, preprocessing is required due to several issues 
 
-watchlist = [(d_train, 'train'), (d_valid, 'valid')]
+#### ☻ Data cleaning 
 
-bst = xgb.train(params, d_train, 400, watchlist, early_stopping_rounds=50, verbose_eval=10)
-```
-그리고 test 작업 진행함.
-```
-d_test = xgb.DMatrix(x_test)
-p_test = bst.predict(d_test)
+#### ☻ Encoding 
 
-sub = pd.DataFrame()
-sub['test_id'] = df_test['test_id']
-sub['is_duplicate'] = p_test
-sub.to_csv('simple_xgb.csv', index=False)
-```
+categorical data -> numerical data 
 
-score is `0.35460` on the leaderboard. 
+### ☺︎ Data mining 
+
+
+#### ☻ Data visualization 
+
+
+
+#### ☻ Features correlation 
+
 
 
 -----------------------------------------------------------------------
 
 ### ☻ Reference
-1. [ ]( )
+
 
 
 ### ☻ image sources
 1. [Giphy](https://giphy.com/search/sesame-street)
-
------------------------------------
-
--->
-
