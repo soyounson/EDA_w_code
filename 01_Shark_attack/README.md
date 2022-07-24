@@ -88,6 +88,15 @@ In details, it is necessary to understand all columns, contents, and values whet
 - [delete] `Unnamed: 23`  : all nan
 
 
+#### ☻ Issues 
+
+There are several erors including missing values, duplication, noise, categorical values, mixing values etc. Thus, data cleaning and preprocessing are strongly required. Different approaches should be considered for data analysis.   
+
+<p align="center">
+<img src="/images/shark_Data_error.png" width="800">
+</p>
+
+
 -------------------------------------------------
 ### ☺︎ Preprocessing 
 
