@@ -19,19 +19,10 @@ Please check environments and requirements before you start to run our sample co
 
 ### ☾ Table of contents
 - [x] 01. [Global Shark Attacks](https://github.com/soyounson/DM_w_code/blob/main/01_Shark_attack/README.md)
-- [ ] 02. 
+- [ ] 02. [NLP]()
 - [ ] 03. 
 - [ ] 04. 
 - [ ] 05. 
 
 -----------------------------------------------------------------------
-
-### ☺︎ Datasets 
-
-#### ☻ Glabal Shark Attacks
-
-```
-(base) ist-xxx-xx: ~ $ python 01_Shark_attack/shark_attack.py
-```
-
 
